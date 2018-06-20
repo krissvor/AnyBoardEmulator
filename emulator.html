@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- cordova.js based -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!--CSS-->
+    <link href="emulatorStyle.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- AnyboardJS libraries -->
+    <script src="dist/anyboard.js"></script>
+
+    <!-- Bluetooth driver and dependencies-->
+    <script src="drivers/dummyDiscoveryDriver.js"></script>
+    <script src="drivers/dummyPawn.js"></script>
+    <script src="js/emulator.js"></script>
+
+    <!--Angular minified-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <!-- We've used jquery for quick development -->
+    <script src="libs/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <input type="text" id="folderPath">
+    <button class="btn text-left" onclick="choosePath()">Load game folder</button>
+    <button class="btn text-left" onclick="initGameState()">Initialize game state</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md">
+                <h1>Game screen</h1>
+                <div><iframe id="iframe" style="width:1000px; height: 1000px;"></iframe></div>
+            </div>
+            <div class="col-md">
+                <div class="container">
+                    <div class="row">
+                        <h1>Information about selected token</h1>
+                        <div id="currentTokenInfo" style="width: 500px; height:500px; border: 2px solid black">
+                            <table id="tokenInfoTable">
+                                <col width="150;">
+                                <tr>
+                                    <td>Name</td>
+                                    <td id="currentName"></td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td id="currentAddress"></td>
+                                </tr>
+                                <tr>
+                                    <td>Color</td>
+                                    <td id="currentColor"></td>
+                                </tr>
+                                <tr id="currentIdTr">
+                                    <td>Id</td>
+                                    <td id="currentId"></td>
+                                </tr>
+                                <tr id="currentSectorTr">
+                                    <td>Currently on sector</td>
+                                    <td id="currentConstraint"></td>
+                                </tr>
+                            </table>
+                            <div id="ledPatternDiv" style="display:none;">
+                                Led pattern displayed on token
+                                <br>
+                                <canvas id="ledPatternCanvas" width="200" height="200" style="border:1px solid #000000;"></canvas>
+                            </div>
+                            <div id="printHistoryDiv" style="display:none;">
+                                Print history of printer
+                                <div id="printHistory"  style="width:480px; height:300px; border:1px solid #000000; overflow: scroll"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" container-fluid">
+                            <div class="row"><h1>Token interactions</h1></div>
+                            <div class="row">
+                                <div class="col-lg" style="width:50%">
+                                    Connected tokens:<br>
+                                    <div class="btn-group-vertical" id="connectedTokens"></div>
+                                </div>
+                                <div class="col-lg" style="width:50%">
+                                    Actions:<br>
+                                    <div class="btn-group-vertical" id="interactionButtons" style="display: none">
+                                        <button class="btn text-left" onclick="moveTokenToConstraint()"> Move token to sector</button>
+                                        <button class="btn text-left" onclick="tapToken()">Tap current token</button>
+                                        <button class="btn text-left" onclick="doubleTapToken()">Double tap current token</button>
+                                        <button class="btn text-left" onclick="shakeToken()">Shake current token</button>
+                                        <button class="btn text-left" onclick="rotateToken(1)">Rotate clockwise</button>
+                                        <button class="btn text-left" onclick="rotateToken(0)">Rotate counter clockwise</button>
+                                        <button class="btn text-left" onclick="tiltToken()">Tilt</button>
+                                        <button class="btn text-left" id="tokenTokenButton" onclick="toggleMoveTokenToToken()">Move selected token next to token</button>
+                                        Sector: <input class="form-control" id="constraint" placeholder="Type sector number"  type="text" name="constraint"><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-md">
+                    <div class="row">
+                        <div class="col-md">
+                            <h1>HyperLogger for cordova</h1>
+                            <button class="btn text-left" onclick="clearHyper()">Clear</button>
+                            <div id="hyperLog" style="width: 500px; height:500px; border: 2px solid black; overflow:scroll;"></div>
+                        </div>
+                    <div class="col-md">
+                        <h1>Token event logger</h1>
+                        <button class="btn text-left" onclick="clearEvent()">Clear</button>
+                        <div id="eventLog" style="width: 500px; height:500px; border: 2px solid black; overflow:scroll;"></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
