@@ -6,36 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fb6b0fd8-7b4d-4b70-abd7-25c6fa7b83de" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/README.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/dist/anyboard.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/drivers/bean.evothings.bluetooth.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/drivers/discovery.evothings.bluetooth.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/evothings.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/firmware/BeanPrinter/BeanPrinter.ino" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/libs/evothings/easyble/easyble.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/libs/evothings/evothings.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/libs/evothings/util/util.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/css/evothings-app.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Black-webfont.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Black-webfont.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Black-webfont.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Black-webfont.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Bold-webfont.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Bold-webfont.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Bold-webfont.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Bold-webfont.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Reg-webfont.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Reg-webfont.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Reg-webfont.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova-Reg-webfont.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/fonts/ProximaNova.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/images/arrow-left.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/images/arrow-right.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/images/logo.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/demo-anyDeck/ui/images/menu.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/js/emulator.js" afterPath="$PROJECT_DIR$/js/emulator.js" />
+      <change beforePath="$PROJECT_DIR$/evothings.json" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -243,11 +214,6 @@
               <item name="safety" type="b2602c69:ProjectViewProjectNode" />
               <item name="safety" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="safety" type="b2602c69:ProjectViewProjectNode" />
-              <item name="safety" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -312,12 +278,12 @@
       <workItem from="1527605869010" duration="8481000" />
       <workItem from="1527788743428" duration="1196000" />
       <workItem from="1528727811685" duration="92720000" />
-      <workItem from="1529584539153" duration="772000" />
+      <workItem from="1529584539153" duration="833000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247021000" />
+    <option name="totallyTimeSpent" value="247082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
