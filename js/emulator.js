@@ -8,43 +8,47 @@ var frame;
  * Init function meant to be utilized by the developer to reach a desired game state
  */
 function initGameState(){
-    var nextPanelButtons = frame.document.getElementsByClassName('activate-next-panel');
-    nextPanelButtons[0].click();
-    var discoverBluetooth = frame.document.getElementsByClassName("discover-bluetooth");
-    discoverBluetooth[0].click();
-    for(var i = 0; i<=1; i++){
-        frame.AnyBoard.TokenManager.get(i).connect();
-    }
-    frame.AnyBoard.TokenManager.get(3).connect();
-    //GAME STATE 1
-    nextPanelButtons[1].click();
-    nextPanelButtons[2].click();
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    tapToken(1);
-    //GAME STATE 2
-    doubleTapToken(0);
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    moveTokenToConstraint(0,3);
-    doubleTapToken(1);
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    shakeToken(0);
-    tiltToken(1);
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    doubleTapToken(0);
-    shakeToken(1);
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    tiltToken(0);
-    //GAME STATE 3
-    tapToken(1);
-    moveTokenToConstraint(0,2);
-    moveTokenToToken(1,0);
-    frame.$("#printButton").click();
-    //GAME STATE 4
+
+
+
+    /**Code required to progress through anyboard quiz game v2**/
+    // var nextPanelButtons = frame.document.getElementsByClassName('activate-next-panel');
+    // nextPanelButtons[0].click();
+    // var discoverBluetooth = frame.document.getElementsByClassName("discover-bluetooth");
+    // discoverBluetooth[0].click();
+    // for(var i = 0; i<=1; i++){
+    //     frame.AnyBoard.TokenManager.get(i).connect();
+    // }
+    // frame.AnyBoard.TokenManager.get(3).connect();
+    // //GAME STATE 1
+    // nextPanelButtons[1].click();
+    // nextPanelButtons[2].click();
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // tapToken(1);
+    // //GAME STATE 2
+    // doubleTapToken(0);
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // moveTokenToConstraint(0,3);
+    // doubleTapToken(1);
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // shakeToken(0);
+    // tiltToken(1);
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // doubleTapToken(0);
+    // shakeToken(1);
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // tiltToken(0);
+    // //GAME STATE 3
+    // tapToken(1);
+    // moveTokenToConstraint(0,2);
+    // moveTokenToToken(1,0);
+    // frame.$("#printButton").click();
+    // //GAME STATE 4
 }
 
 window.addEventListener("load", function() {
@@ -56,18 +60,15 @@ window.addEventListener("load", function() {
     });
 });
 
-function choosePath(){
+function choosePath() {
     var path = document.getElementById("folderPath").value + "/index.html";
     var iframe = document.getElementById("iframe");
     iframe.src = path;
     var eventLogger = document.getElementById("eventLog");
-    eventLogger.addEventListener('change', function(){ eventLogger.scrollTop = eventLogger.scrollHeight});
-
-    //FLYTT DETTEEEEEE!!!!
-    // iframe.style.height = "300px";
-    // iframe.style.width = "200px";
-   }
-
+    eventLogger.addEventListener('change', function () {
+        eventLogger.scrollTop = eventLogger.scrollHeight
+    });
+}
 /**
  * Funtion that recieves messages from the game drivers contained within the iframe of the emulator.
  * @param message JSON string containing information regarding which action has been taken on which token, or what should be logged in which logger.
