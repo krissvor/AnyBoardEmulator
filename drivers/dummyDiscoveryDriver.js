@@ -20,9 +20,15 @@
 
 
 
+
     dummyDiscoveryDriver._devices = {};
 
-
+    /**
+     *
+     * @param {Object} token Token to connect to
+     * @param {Function} win Callback function upon success
+     * @param {Function} fail Callback function upon fail
+     */
     dummyDiscoveryDriver.connect = function (token, win, fail) {
         console.log("connecting to " + token.name);
         if(token.name.toLowerCase() === "anypawn") {
@@ -36,6 +42,11 @@
         window.parent.postMessage(JSON.stringify( {'function': "CONNECT", 'tokenAddress': token.address}),'*');
     };
 
+    /**
+     * Initiates three virtual AnyPawns, and on virtual AnyPrinter
+     * @param {Function} win Callback function on every discovered token
+     * @param {Function} fail Callback function if no tokens are discovered
+     */
     dummyDiscoveryDriver.scan = function(win, fail){
         self = this;
         console.log("scanning");
@@ -58,10 +69,20 @@
 
     }
 
+    /**
+     * Terminates connection to token, and sends message to emulator
+     * @param {Object token Token to disconnect from
+     */
     dummyDiscoveryDriver.disconnect = function(token){
         window.parent.postMessage(JSON.stringify( {'function': "DISCONNECT", 'tokenAddress': token.address}),'*');
     };
 
+    /**
+     * Initializes virtual AnyPawn
+     * @param {Object} device Virtual device created upon scan()
+     * @returns {AnyBoard.BaseToken} token Returns BaseToken with populated cache, according to supported functionality
+     * @private
+     */
     dummyDiscoveryDriver._initializeDummyToken = function (device){
         AnyBoard.Logger.log('device found')
         var token = new AnyBoard.BaseToken(device.name, device.address, device, this);
@@ -82,6 +103,12 @@
         return token;
     };
 
+    /**
+     * Initializes virtual Printer
+     * @param {Object} device Virtual device created upon scan()
+     * @returns {AnyBoard.BaseToken} token Returns BaseToken with populated cache, according to supported functionality
+     * @private
+     */
     dummyDiscoveryDriver._initializeDummyPrinter = function (device){
         AnyBoard.Logger.log('device found')
         var token = new AnyBoard.BaseToken(device.name, device.address, device, this);

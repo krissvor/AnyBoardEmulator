@@ -255,9 +255,9 @@
 
 
     /**
-     * Function triggered by the emulator so simulate receiving a signal from a physical token.
-     * @param token Token which the simulated event has taken place on.
-     * @param uint8array Array containing values representing the event taking place, mapped in _CMD_CODE, and any parameters that accompany the event.
+     * Function triggered by the emulator to simulate receiving a signal from a physical token.
+     * @param {Object} token Token which the simulated event has taken place on.
+     * @param {Uint8Array} uint8array Array containing values representing the event taking place, mapped in _CMD_CODE, and any parameters that accompany the event.
      */
     dummyPawn.handleReceiveUpdateFromToken = function(token, uint8array) {
         var command = uint8array[0];
@@ -375,7 +375,7 @@
     };
 
 
-    /**
+    /*
      * The following set of functions utilize _COMMANDS to retrieve functions to execute.
      * @param token Token to execute on
      * @param win Success callback
@@ -468,7 +468,7 @@
         COMMANDS.HAS_PRINT(token, win, fail);
     };
 
-    /**
+    /*
      * Taken from evothings ble. replaced unescape with decodeURI
      * @param data
      * @returns {Uint8Array}
@@ -484,7 +484,7 @@
         return ab;
     };
 
-    /**
+    /*
      * Has to be present in order for driver to be accepted by the baseToken
      */
     dummyPawn.send = function() {

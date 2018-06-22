@@ -3,75 +3,78 @@ var currentToken = null;
 var secondaryToken = null;
 var moveTokenToTokenActive = false;
 var frame;
+var iframe
 
 /**
  * Init function meant to be utilized by the developer to reach a desired game state
  */
 function initGameState(){
-
-
-
-    /**Code required to progress through anyboard quiz game v2**/
-    // var nextPanelButtons = frame.document.getElementsByClassName('activate-next-panel');
-    // nextPanelButtons[0].click();
-    // var discoverBluetooth = frame.document.getElementsByClassName("discover-bluetooth");
-    // discoverBluetooth[0].click();
-    // for(var i = 0; i<=1; i++){
-    //     frame.AnyBoard.TokenManager.get(i).connect();
-    // }
-    // frame.AnyBoard.TokenManager.get(3).connect();
-    // //GAME STATE 1
-    // nextPanelButtons[1].click();
-    // nextPanelButtons[2].click();
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // tapToken(1);
-    // //GAME STATE 2
-    // doubleTapToken(0);
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // moveTokenToConstraint(0,3);
-    // doubleTapToken(1);
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // shakeToken(0);
-    // tiltToken(1);
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // doubleTapToken(0);
-    // shakeToken(1);
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // tiltToken(0);
-    // //GAME STATE 3
-    // tapToken(1);
-    // moveTokenToConstraint(0,2);
-    // moveTokenToToken(1,0);
-    // frame.$("#printButton").click();
-    // //GAME STATE 4
+    var nextPanelButtons = frame.document.getElementsByClassName('activate-next-panel');
+    nextPanelButtons[0].click();
+    var discoverBluetooth = frame.document.getElementsByClassName("discover-bluetooth");
+    discoverBluetooth[0].click();
+    for(var i = 0; i<=1; i++){
+        frame.AnyBoard.TokenManager.get(i).connect();
+    }
+    frame.AnyBoard.TokenManager.get(3).connect();
+    //GAME STATE 1
+    nextPanelButtons[1].click();
+    nextPanelButtons[2].click();
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    tapToken(1);
+    //GAME STATE 2
+    doubleTapToken(0);
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    moveTokenToConstraint(0,3);
+    doubleTapToken(1);
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    shakeToken(0);
+    tiltToken(1);
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    doubleTapToken(0);
+    shakeToken(1);
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    tiltToken(0);
+    //GAME STATE 3
+    tapToken(1);
+    moveTokenToConstraint(0,2);
+    moveTokenToToken(1,0);
+    frame.$("#printButton").click();
+    //GAME STATE 4
 }
 
 window.addEventListener("load", function() {
     window.addEventListener("message", receiveMessage);
-    var iframe = document.getElementById("iframe");
+    iframe = document.getElementById("iframe");
     frame = iframe.contentWindow;
     iframe.addEventListener("load", function(){
         // initGameState();
+        frame = iframe.contentWindow;
     });
 });
 
-function choosePath() {
-    var path = document.getElementById("folderPath").value + "/index.html";
-    var iframe = document.getElementById("iframe");
+function choosePath(inputPath){
+    var path;
+    if(inputPath){
+        path = inputPath + "/index.html";
+    }else {
+        path = document.getElementById("folderPath").value + "/index.html";
+    }
+    iframe = document.getElementById("iframe");
     iframe.src = path;
     var eventLogger = document.getElementById("eventLog");
-    eventLogger.addEventListener('change', function () {
-        eventLogger.scrollTop = eventLogger.scrollHeight
-    });
-}
+
+    eventLogger.addEventListener('change', function(){ eventLogger.scrollTop = eventLogger.scrollHeight});
+   }
+
 /**
- * Funtion that recieves messages from the game drivers contained within the iframe of the emulator.
- * @param message JSON string containing information regarding which action has been taken on which token, or what should be logged in which logger.
+ * Funtion that recieves messages from the game drivers contained within the iframe of the emulator, and forward the parameters to the appropriate handling function
+ * @param {string} message  Message containing information regarding which action has been taken on which token, or what should be logged in which logger.
  */
 function receiveMessage(message) {
     var action = JSON.parse(message.data);
@@ -154,7 +157,7 @@ function hyperLog(data){
 
 /**
  * Emulates printing to a printer.
- * @param action Message from driver containing information regarding which token should be printed to.
+ * @param {Object} action Message from driver containing information regarding which token should be printed to.
  */
 function printNewLine(action){
     var printer = frame.AnyBoard.TokenManager.get(action.tokenAddress);
@@ -164,7 +167,7 @@ function printNewLine(action){
 
 /**
  * Emulates feeding a line to a printer
- * @param action Message from driver containing information regarding which token should be fed a line.
+ *  @param {Object} action Message from driver containing information regarding which token should be fed a line.
  */
 function printFeed(action){
     var printer = frame.AnyBoard.TokenManager.get(action.tokenAddress);
@@ -175,7 +178,7 @@ function printFeed(action){
 
 /**
  * Emulates printing to a printer
- * @param action Message from driver containing information regarding which token should be printed to, and what text should be printed.
+ * @param {Object} action Message from driver containing information regarding which token should be printed to, and what text should be printed.
  */
 function printWrite(action){
     var printer = frame.AnyBoard.TokenManager.get(action.tokenAddress);
@@ -192,7 +195,7 @@ function printWrite(action){
 
 /**
  * Sets the alignment of the printer
- * @param action Message from driver containing information regarding which alignement should be set to which token.
+ *  @param {Object} action Message from driver containing information regarding which alignment should be set to which token.
  */
 function printJustify(action){
     var printer = frame.AnyBoard.TokenManager.get(action.tokenAddress);
@@ -214,9 +217,9 @@ function printJustify(action){
 
 /**
  * Sets the print size of the printer
- * @param action Message from driver containing information regarding which text size should be set on which token.
+ * @param {Object} action Message from driver containing information regarding which text size should be set on which token.
  */
-function printSetSize(action){ var frame = document.getElementById("iframe").contentWindow;
+function printSetSize(action){
     var printer = frame.AnyBoard.TokenManager.get(action.tokenAddress);
     var letter = String.fromCharCode(action.data[0]);
     printer.printSize = letter;
@@ -238,7 +241,7 @@ function printSetSize(action){ var frame = document.getElementById("iframe").con
 
 /**
  * Logs connection to event log and loads connected token, receiving connect message from driver
- * @param action Message from driver, containing address of connected token
+ * @param {Object} action Message from driver, containing address of connected token
  */
 function handleConnect(action){
    logEvent("Connected to Token" + action.tokenAddress +" <br>");
@@ -247,7 +250,7 @@ function handleConnect(action){
 
 /**
  * Logs disconnect to event log, and loads connected tokens.
- * @param action Message from driver, containing address of connected token
+ * @param {Object} action Message from driver, containing address of connected token
  */
 function handleDisConnect(action){
     logEvent("Disconnected from Token" + action.tokenAddress +" <br>");
@@ -256,7 +259,7 @@ function handleDisConnect(action){
 
 /**
  * Logs to event log when a token has been vibrated
- * @param action Message from driver, containing address of vibrated token, and duration of vibration.
+ * @param {Object} action Message from driver, containing address of vibrated token, and duration of vibration.
  */
 function handleVibrate(action){
     logEvent("Vibrated Token" + action.tokenAddress + " for " +  action.data[0] + " seconds <br>");
@@ -265,7 +268,7 @@ function handleVibrate(action){
 
 /**
  * Logs to event log when a token has its display pattern changed and updates current token information if the token is selected in the interface.
- * @param action Message from driver, containing address of changed token, and the display pattern.
+ * @param {Object} action Message from driver, containing address of changed token, and the display pattern.
  */
 function handleDisplayPattern(action){
     var changeToken = frame.AnyBoard.TokenManager.tokens[action.tokenAddress];
@@ -278,7 +281,7 @@ function handleDisplayPattern(action){
 
 /**
  * Logs to event log when a token has a change to its LED status, as well as updating the user interface
- * @param action Message from the driver, containing address of changed token, and new LED status.
+ * @param {Object} action Message from the driver, containing address of changed token, and new LED status.
  */
 function handleLedChange(action){
     if(document.getElementById("token"+action.tokenAddress)) {
@@ -294,7 +297,7 @@ function handleLedChange(action){
 
 /**
  * Logs to event log when a tokens led has been switched off, as well as updating the user interface.
- * @param {JSONobject} {action} JSON object containing address of changed token token address and
+ * @param {Object} action Message from the driver, containing address of changed token and new LED status
  */
 
 function handleLedOff(action){
@@ -308,7 +311,7 @@ function handleLedOff(action){
 
 /**
  * Logs to event logger when a tokens led is blinking.
- * @param {JSONobject} {action} JSON object containing token address, dureation of blinking and frequencyu of blinking.
+ * @param {Object} action Message from driver containing token address, duration and frequency of blinking.
  */
 function handleLedBlink(action){
     var changeToken = frame.AnyBoard.TokenManager.tokens[action.tokenAddress];
@@ -412,8 +415,8 @@ function setCurrentToken(address){
 
 /**
  * Triggers token-constraint event in driver. Can be given input from code, otherwise address and constraint will be retrieved from user interface.
- * @param {number} [address] *{optional}* Address of token that should be moved.
- * @param [number} [constraint] *{optional} Constraint that token should be moved to.
+ * @param {number} address *{optional}* Address of token that should be moved.
+ * @param {number} constraint *{optional}* Constraint that token should be moved to.
  */
 function moveTokenToConstraint(address, constraint){
     if(!constraint){
@@ -456,8 +459,8 @@ function toggleMoveTokenToToken(){
 
 /**
  * Triggers token-token event in driver, simulating moving one token next to another, and logs to event logger.
- * @param {number} movingTokenAddress Address of token being moved.
- * @param {number} toTokenAddress Address of token being moved next to.
+ * @param {number} movingTokenAddress *{optional}* Address of token being moved.
+ * @param {number} toTokenAddress *{optional}* Address of token being moved next to.
  */
 function moveTokenToToken(movingTokenAddress, toTokenAddress) {
     if(Number.isInteger(movingTokenAddress) && Number.isInteger(toTokenAddress)) {
@@ -482,7 +485,7 @@ function moveTokenToToken(movingTokenAddress, toTokenAddress) {
 /**
  * Triggers token event in driver, simulating a token being tapped, and log to event logger.
  * If no input parameters are given, they will be retrieved from user interface.
- * @param {number} [address] *{optional}* Address of token being tapped.
+ * @param {number} address *{optional}* Address of token being tapped.
  */
 function tapToken(address){
     if(Number.isInteger(Number(address))){
@@ -499,7 +502,7 @@ function tapToken(address){
 /**
  * Triggers token event in driver, simulating a token being double tapped, and logs to event logger.
  * If no input parameters are given, they will be retrieved from user interface.
- * @param {number} [address] *{optional}* Address of token being double tapped
+ * @param {number} address *{optional}* Address of token being double tapped
  */
 function doubleTapToken(address){
     if(Number.isInteger(Number(address))){
@@ -516,7 +519,7 @@ function doubleTapToken(address){
 /**
  * Triggers token event in driver, simulating a token being shaken, and logs to event logger.
  * If no input parameters are given, they will be retrieved from user interface.
- * @param {number} [address] *{optional} Address of token being shaken.
+ * @param {number} address *{optional} Address of token being shaken.
  */
 function shakeToken(address){
     if(Number.isInteger(Number(address))){
@@ -534,7 +537,7 @@ function shakeToken(address){
 /**
  * Triggers token event in driver, simulating a token being tilted, and logs to event logger.
  * If no input parameters are given, they will be retrieved from user interface.
- * @param {number} [address] *{optional} Address of token being tilted.
+ * @param {number} address *{optional} Address of token being tilted.
  */
 function tiltToken(address){
     if(Number.isInteger(Number(address))){
@@ -552,7 +555,7 @@ function tiltToken(address){
  * Triggers token event in driver, simulating a token being tilted, and logs to event logger.
  * If no input parameters are given, they will be retrieved from user interface.
  * @param {number} direction Direction of rotation 1=clockwise, 0=counter clockwise.
- * @param {number} [address] *{optional} Address of token being tilted.
+ * @param {number} address *{optional} Address of token being tilted.
  */
 function rotateToken(direction, address){
     if(Number.isInteger(Number(address))){
@@ -578,6 +581,7 @@ function rotateToken(direction, address){
  * Loads connected tokens from the game implementation and injects them with associated buttons into user interface.
  */
 function loadConnectedTokens(){
+    frame = iframe.contentWindow;
     var connectedTokens = document.getElementById("connectedTokens");
     connectedTokens.innerHTML = "";
     tokens = frame.AnyBoard.TokenManager.tokens;
